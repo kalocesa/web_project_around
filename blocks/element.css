@@ -1,0 +1,37 @@
+.element {
+  background-color: #ffffff;
+  color: #000000;
+  max-width: 282px;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 10px, 10px, 0, 0;
+}
+
+.element__image {
+  max-width: 282px;
+  width: 100%;
+}
+
+.element__group {
+  max-width: 246px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.element__text {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.element__button-like {
+  max-width: 21px;
+  width: 100px;
+}
+
+.element__button-like:hover {
+  opacity: 50%;
+}

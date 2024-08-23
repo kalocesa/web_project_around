@@ -1,0 +1,50 @@
+.profile {
+  width: 880px;
+  max-width: 100%;
+  margin: auto;
+  display: flex;
+}
+
+.profile__avatar {
+  width: 120px;
+  max-width: 100%;
+}
+
+.profile__content-text {
+  width: 415px;
+  max-width: 100%;
+}
+
+.profile__name {
+  width: 373px;
+  max-width: 100%;
+  font-weight: 500;
+  font-size: 2.6rem;
+  line-height: 3rem;
+}
+
+.profile__button-edit {
+  width: 24px;
+  max-width: 100%;
+}
+
+.profile__button-edit:hover {
+  opacity: 60%;
+}
+
+.profile__explorer {
+  width: 415px;
+  max-width: 100%;
+  font-weight: 400px;
+  font-size: 1.1rem;
+  line-height: 1.3rem;
+}
+
+.profile__button-add {
+  width: 150px;
+  max-width: 100%;
+}
+
+.profile__button-add:hover {
+  opacity: 60%;
+}
