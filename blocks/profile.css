@@ -1,11 +1,9 @@
 .profile {
-  width: 880px;
-  max-width: 100%;
+  border: 1px solid red;
+  max-width: 880px;
+  width: 100%;
   margin: auto;
   margin-top: 40px;
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid red;
 }
 
 .profile__avatar {
@@ -16,21 +14,26 @@
 .profile__content {
   max-width: 415px;
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto 22px;
+  column-gap: 18px;
+  row-gap: 16px;
+  align-content: center;
 }
 
 .profile__name {
   max-width: 373px;
   width: 100%;
+  font-family: "Inter";
   font-weight: 500;
-  font-size: 2.6rem;
-  line-height: 3rem;
+  font-size: 42px;
+  line-height: 48px;
 }
 
 .profile__button-edit {
   max-width: 24px;
-  width: 100%;
+  align-self: end;
 }
 
 .profile__button-edit:hover {
@@ -38,11 +41,9 @@
 }
 
 .profile__explorer {
-  max-width: 415px;
-  width: 100%;
-  font-weight: 400px;
-  font-size: 1.1rem;
-  line-height: 1.3rem;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
 }
 
 .profile__button-add {
@@ -54,8 +55,11 @@
   opacity: 60%;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1024px) {
   .profile {
     width: 95%;
   }
+}
+
+@media screen and (max-width: 768px) {
 }
