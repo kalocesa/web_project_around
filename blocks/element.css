@@ -1,12 +1,10 @@
 .element {
-  background-color: #ffffff;
-  color: #000000;
   max-width: 282px;
   width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  border-radius: 10px, 10px, 0, 0;
+  max-height: 361;
+  color: #000000;
+  background-color: #ffffff;
+  border-radius: 10px;
 }
 
 .element__image {
@@ -17,14 +15,21 @@
 .element__group {
   max-width: 246px;
   width: 100%;
+  padding: 25px 15px 31px 21px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .element__text {
+  max-width: 246px;
+  width: 100%;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .element__button-like {

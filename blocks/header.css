@@ -4,6 +4,7 @@
   flex-direction: column;
   margin: auto;
   margin-top: 45px;
+  border: 1px solid red;
 }
 
 .header__icon {
@@ -16,7 +17,7 @@
   margin-top: 41px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 960px) {
   .header__icon {
     margin-left: 27px;
   }

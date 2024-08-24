@@ -2,30 +2,35 @@
   width: 880px;
   max-width: 100%;
   margin: auto;
+  margin-top: 40px;
   display: flex;
+  justify-content: space-between;
+  border: 1px solid red;
 }
 
 .profile__avatar {
-  width: 120px;
-  max-width: 100%;
+  max-width: 120px;
+  width: 100%;
 }
 
-.profile__content-text {
-  width: 415px;
-  max-width: 100%;
+.profile__content {
+  max-width: 415px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .profile__name {
-  width: 373px;
-  max-width: 100%;
+  max-width: 373px;
+  width: 100%;
   font-weight: 500;
   font-size: 2.6rem;
   line-height: 3rem;
 }
 
 .profile__button-edit {
-  width: 24px;
-  max-width: 100%;
+  max-width: 24px;
+  width: 100%;
 }
 
 .profile__button-edit:hover {
@@ -33,18 +38,24 @@
 }
 
 .profile__explorer {
-  width: 415px;
-  max-width: 100%;
+  max-width: 415px;
+  width: 100%;
   font-weight: 400px;
   font-size: 1.1rem;
   line-height: 1.3rem;
 }
 
 .profile__button-add {
-  width: 150px;
-  max-width: 100%;
+  max-width: 150px;
+  width: 100%;
 }
 
 .profile__button-add:hover {
   opacity: 60%;
+}
+
+@media screen and (max-width: 960px) {
+  .profile {
+    width: 95%;
+  }
 }
