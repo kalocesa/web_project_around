@@ -4,21 +4,27 @@
   flex-direction: column;
   margin: auto;
   margin-top: 45px;
-  border: 1px solid red;
 }
 
 .header__icon {
   width: 173px;
   max-width: 100%;
+  margin-bottom: 41px;
 }
 
 .header__line {
   max-width: 100%;
-  margin-top: 41px;
 }
 
 @media screen and (max-width: 960px) {
   .header__icon {
     margin-left: 27px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .header__icon {
+    width: 126px;
+    margin-bottom: 32px;
   }
 }
