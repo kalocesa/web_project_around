@@ -5,14 +5,7 @@
   margin-top: 40px;
   display: grid;
   grid-template-columns: 168px auto 150px;
-}
-
-.profile__content-avatar {
-  max-width: 168px;
-  max-height: 120px;
-  background-color: black;
-  display: flex;
-  justify-content: center;
+  align-items: center;
 }
 
 .profile__avatar {
@@ -24,6 +17,7 @@
 .profile__content-edit {
   max-width: 415px;
   width: 100%;
+  height: auto;
   display: flex;
   flex-wrap: wrap;
 }
@@ -34,7 +28,6 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
-  display: block;
 }
 
 .profile__button-edit {
@@ -44,6 +37,7 @@
 
 .profile__button-edit:hover {
   opacity: 60%;
+  cursor: pointer;
 }
 
 .profile__explorer {
@@ -57,12 +51,11 @@
 
 .profile__button-add {
   width: 100%;
-  margin: auto 0;
-
 }
 
 .profile__button-add:hover {
   opacity: 60%;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {
@@ -71,17 +64,36 @@
   }
 }
 
-@media screen and (max-width: 790px) {
+@media screen and (max-width: 800px) {
   .profile {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    row-gap: 33px;
+  }
+
+  .profile__content-edit {
+    text-align: center;
+  }
 }
 
-.profile__button-add {
-  margin-top: 36px;
-  height: 50px;
+@media screen and (max-width: 580px) {
+  .profile__content-edit {
+    justify-content: center;
+  }
+  .profile__name {
+    font-size: 32px;
+    line-height: 36px;
+    max-width: 284px;
+    margin-right: 10px;
+    text-align: start;
+  }
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 360px) {
+  .profile__name {
+    font-size: 22px;
+    line-height: 26px;
+    max-width: 196px;
+  }
 }
