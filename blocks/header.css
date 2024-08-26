@@ -1,25 +1,18 @@
 .header {
-  width: 880px;
-  display: flex;
-  flex-direction: column;
+  max-width: 880px;
+  width: 100%;
   margin: auto;
-  margin-top: 45px;
 }
 
 .header__icon {
   width: 173px;
   max-width: 100%;
   margin-bottom: 41px;
+  margin-top: 45px;
 }
 
 .header__line {
-  max-width: 100%;
-}
-
-@media screen and (max-width: 960px) {
-  .header__icon {
-    margin-left: 27px;
-  }
+  width: 100%;
 }
 
 @media screen and (max-width: 580px) {
