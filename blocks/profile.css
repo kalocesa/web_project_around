@@ -49,11 +49,22 @@
   margin-top: 18px;
 }
 
-.profile__button-add {
+.profile__content-add {
   width: 100%;
+  height: 50px;
+  background-color: #000000;
+  border: 3px solid white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.profile__button-add:hover {
+.profile__button-add {
+  max-width: 24px;
+}
+
+.profile__content-add:hover {
   opacity: 60%;
   cursor: pointer;
 }
@@ -74,6 +85,10 @@
 
   .profile__content-edit {
     text-align: center;
+  }
+
+  .profile__content-add {
+    max-width: 282px;
   }
 }
 
