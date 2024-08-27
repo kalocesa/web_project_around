@@ -1,32 +1,24 @@
 .element {
-  max-width: 282px;
   width: 100%;
-  max-height: 361;
-  color: #000000;
   background-color: #ffffff;
   border-radius: 10px;
 }
 
 .element__image {
-  max-width: 282px;
   width: 100%;
 }
 
 .element__group {
-  max-width: 246px;
-  width: 100%;
-  padding: 25px 15px 31px 21px;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  padding: 25px 15px 31px 21px;
 }
 
 .element__text {
-  max-width: 246px;
-  width: 100%;
-  font-weight: 900;
   font-size: 24px;
   line-height: 29px;
+  font-weight: 900;
+  color: #000000;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -34,9 +26,10 @@
 
 .element__button-like {
   max-width: 21px;
-  width: 100px;
+  width: 100%;
 }
 
 .element__button-like:hover {
-  opacity: 50%;
+  opacity: 60%;
+  cursor: pointer;
 }
