@@ -151,26 +151,26 @@
           <img
             src="./images/Close Icon.svg"
             alt="icono para cerrar"
-            class="popup__close"
+            class="popup__button-close"
           />
           <h2 class="popup__title">Editar perfil</h2>
-          <form class="popup__form">
+          <form id="form" class="popup__form">
             <input
               type="text"
-              class="popup__input"
+              class="popup__input popup__input_name"
               id="name"
-              name="name"
+              name="nombre"
               placeholder="Nombre"
             />
             <input
               type="text"
-              class="popup__input"
-              id="Acerca"
+              class="popup__input popup__input_aboutme"
+              id="aboutme"
               name="Acerca de mí"
               placeholder="Acerca de mí"
             />
           </form>
-          <button type="submit" value="Guardar" class="popup__button-submit">
+          <button id="submit" value="Guardar" class="popup__button-submit">
             Guardar
           </button>
         </div>

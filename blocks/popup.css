@@ -92,14 +92,14 @@
   color: #c4c4c4;
 }
 
-.popup__close {
+.popup__button-close {
   z-index: 1;
   position: absolute;
   top: -32px;
   right: -32px;
 }
 
-.popup__close:hover {
+.popup__button-close:hover {
   opacity: 60%;
   cursor: pointer;
 }
