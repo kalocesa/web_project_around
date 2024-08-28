@@ -26,3 +26,14 @@ buttonSubmit.addEventListener("click", function (submit) {
   profileName.textContent = inputName.value;
   profileExplorer.textContent = inputAboutMe.value;
 });
+
+function toggleButtonState() {
+  if (inputName.value === "" || inputAboutMe.value === "") {
+    buttonSubmit.setAttribute("disabled", true);
+  } else {
+    buttonSubmit.removeAttribute("disabled");
+  }
+}
+
+inputName.addEventListener("input", toggleButtonState);
+inputAboutMe.addEventListener("input", toggleButtonState);
