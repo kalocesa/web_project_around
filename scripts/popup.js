@@ -25,6 +25,8 @@ buttonSubmit.addEventListener("click", function (submit) {
 
   profileName.textContent = inputName.value;
   profileExplorer.textContent = inputAboutMe.value;
+
+  popupNode.classList.remove("popup__open");
 });
 
 function toggleButtonState() {
