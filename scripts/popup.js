@@ -8,34 +8,22 @@ let profileExplorer = document.querySelector(".profile__explorer");
 const inputName = document.querySelector(".popup__input_name");
 const inputAboutMe = document.querySelector(".popup__input_aboutme");
 
-buttonEdit.addEventListener("click", function (event) {
+buttonEdit.addEventListener("click", () => {
   popupNode.classList.add("popup__open");
-  popupNode.classList.toggle("popup_open");
 
   inputName.value = profileName.textContent;
   inputAboutMe.value = profileExplorer.textContent;
 });
 
-popupCloseButton.addEventListener("click", function () {
+popupCloseButton.addEventListener("click", () => {
   popupNode.classList.remove("popup__open");
 });
 
-buttonSubmit.addEventListener("click", function (submit) {
-  popupNode.classList.add("popup__submit");
+buttonSubmit.addEventListener("click", (evt) => {
+  evt.preventDefault();
 
   profileName.textContent = inputName.value;
   profileExplorer.textContent = inputAboutMe.value;
 
   popupNode.classList.remove("popup__open");
 });
-
-function toggleButtonState() {
-  if (inputName.value === "" || inputAboutMe.value === "") {
-    buttonSubmit.setAttribute("disabled", true);
-  } else {
-    buttonSubmit.removeAttribute("disabled");
-  }
-}
-
-inputName.addEventListener("input", toggleButtonState);
-inputAboutMe.addEventListener("input", toggleButtonState);
