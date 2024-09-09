@@ -10,8 +10,10 @@
 
 .profile__avatar {
   max-width: 120px;
+  max-height: 120px;
   width: 100%;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .profile__content-edit {
@@ -101,7 +103,7 @@
     line-height: 36px;
     max-width: 284px;
     margin-right: 10px;
-    text-align: start;
+    text-align: center;
   }
 }
 
