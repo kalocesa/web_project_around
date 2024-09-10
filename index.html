@@ -54,18 +54,28 @@
         </section>
         <section class="elements">
           <div class="element">
+            <button id="button-trash" class="element__button-trash">
+              <img
+                src="./images/trash.svg"
+                alt="bote de basura"
+                class="element__trash"
+              />
+            </button>
             <img
               src="./images/Yosemite.png"
               alt="Valle Yosemite"
               class="element__image"
             />
+
             <div class="element__group">
               <p class="element__text">Valle de Yosemite</p>
-              <img
-                src="./images/Vector (1).svg"
-                alt="botón de like en forma de corazón"
-                class="element__button-like"
-              />
+              <button id="button-like" class="element__like">
+                <img
+                  src="./images/Vector (1).svg"
+                  alt="botón de like en forma de corazón"
+                  class="element__button-like"
+                />
+              </button>
             </div>
           </div>
           <div class="element">
@@ -145,16 +155,17 @@
           </div>
         </section>
       </main>
-      <div class="popup">
+      <div id="popup-profile" class="popup">
         <div class="popup__background"></div>
         <div class="popup__content">
           <img
+            id="popup-profile-close"
             src="./images/Close Icon.svg"
             alt="icono para cerrar"
             class="popup__button-close"
           />
           <h2 class="popup__title">Editar perfil</h2>
-          <form id="form" class="popup__form">
+          <form id="profile-form" class="popup__form">
             <input
               type="text"
               class="popup__input popup__input_name"
@@ -170,7 +181,43 @@
               placeholder="Acerca de mí"
             />
           </form>
-          <button id="submit" value="Guardar" class="popup__button-submit">
+          <button
+            id="profile-submit"
+            value="Guardar"
+            class="popup__button-submit"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+
+      <div id="popup-add" class="popup">
+        <div class="popup__background"></div>
+        <div class="popup__content">
+          <img
+            id="popup-add-close"
+            src="./images/Close Icon.svg"
+            alt="icono para cerrar"
+            class="popup__button-close"
+          />
+          <h2 class="popup__title">Nuevo lugar</h2>
+          <form id="add-form" class="popup__form">
+            <input
+              type="text"
+              class="popup__input popup__input_title"
+              id="title"
+              name="title"
+              placeholder="Título"
+            />
+            <input
+              type="url"
+              class="popup__input popup__input_image"
+              id="image"
+              name="image"
+              placeholder="Imagen (URL)"
+            />
+          </form>
+          <button id="add-submit" value="Guardar" class="popup__button-submit">
             Guardar
           </button>
         </div>

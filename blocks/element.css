@@ -2,10 +2,30 @@
   width: 100%;
   background-color: #ffffff;
   border-radius: 10px;
+  position: relative;
 }
 
 .element__image {
   width: 100%;
+  object-fit: cover;
+}
+
+.element__button-trash {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background-color: transparent;
+}
+
+.element__trash {
+  max-width: 21px;
+  width: 100%;
+}
+
+.element__trash:hover {
+  opacity: 60%;
+  cursor: pointer;
 }
 
 .element__group {
@@ -24,12 +44,24 @@
   overflow: hidden;
 }
 
+.element__like {
+  border: none;
+  background-color: transparent;
+}
+
+.element__like:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
 .element__button-like {
   max-width: 21px;
   width: 100%;
 }
 
-.element__button-like:hover {
-  opacity: 60%;
-  cursor: pointer;
+.element__button-dislike {
+  max-width: 21px;
+  width: 100%;
+  background-image: url(../images/like\ button\ black.svg);
+  background-repeat: no-repeat;
 }
