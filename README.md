@@ -1,6 +1,6 @@
 # Tripleten web_project_around
 
-La pàgina web de Around the U.s muestra el perfil de un explorador en conjunto con las fotos que puede añadir, editar o eliminar a lo largo de su viaje por Estados Unidos. Es el septimo proyecto del bootcamp de Desarrollo Web en Triple Ten. Fue creado utilizando HTML, CSS y JS, con una base de un diseño en Figma.
+La pàgina web de Around to MX muestra el perfil de un explorador en conjunto con las fotos que puede añadir, editar o eliminar a lo largo de su viaje por México. Es el septimo proyecto del bootcamp de Desarrollo Web en Triple Ten. Fue creado utilizando HTML, CSS y JS, con una base de un diseño en Figma.
 
 ## Características del proyecto
 
