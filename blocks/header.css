@@ -6,9 +6,11 @@
 
 .header__icon {
   width: 173px;
+  height: 60px;
   max-width: 100%;
-  margin-bottom: 41px;
+  margin-bottom: 31px;
   margin-top: 45px;
+  object-fit: cover;
 }
 
 .header__line {
