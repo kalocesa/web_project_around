@@ -5,9 +5,9 @@
 }
 
 .header__icon {
-  width: 173px;
+  max-width: 173px;
   height: 60px;
-  max-width: 100%;
+  width: 100%;
   margin-bottom: 31px;
   margin-top: 45px;
   object-fit: cover;
@@ -19,13 +19,18 @@
 
 @media screen and (max-width: 1024px) {
   .header {
-    width: 95%;
+    width: 90%;
   }
 }
 
 @media screen and (max-width: 580px) {
   .header__icon {
     width: 126px;
-    margin-bottom: 32px;
+    margin-bottom: 0;
+  }
+
+  .header__line {
+    border: 1px solid #545454;
+    border-radius: 10px;
   }
 }
