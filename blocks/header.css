@@ -30,7 +30,7 @@
   }
 
   .header__line {
-    border: 1px solid #545454;
+    height: 1px;
     border-radius: 10px;
   }
 }
