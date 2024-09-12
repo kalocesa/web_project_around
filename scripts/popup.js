@@ -77,6 +77,8 @@ formAdd.addEventListener("submit", function (event) {
   const linkValue = event.target.elements.link.value;
   const newCard = createCard(titleValue, linkValue);
   cardsContainer.prepend(newCard);
+  closePopup(popupAdd);
+  formAdd.reset();
 });
 
 //Función para crear las 6 tarjetas a partir de un template

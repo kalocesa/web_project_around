@@ -73,6 +73,7 @@
           <form id="profile-form" class="popup__form">
             <input
               type="text"
+              required
               class="popup__input popup__input_name"
               id="name"
               name="nombre"
@@ -80,6 +81,7 @@
             />
             <input
               type="text"
+              required
               class="popup__input popup__input_aboutme"
               id="aboutme"
               name="Acerca de mí"
@@ -109,6 +111,9 @@
           <form id="add-form" class="popup__form">
             <input
               type="text"
+              required
+              minlength="3"
+              maxlength="30"
               class="popup__input popup__input_title"
               id="title"
               name="title"
@@ -116,6 +121,7 @@
             />
             <input
               type="url"
+              required
               class="popup__input popup__input_link"
               id="link"
               name="link"
