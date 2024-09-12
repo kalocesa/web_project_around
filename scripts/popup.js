@@ -1,5 +1,4 @@
-//Se requieren las variables para trabajar en el popup de añadir datos de perfil
-//LISTO
+//Variables del popup Profile
 const buttonEdit = document.querySelector(".profile__button-edit");
 const popupProfile = document.querySelector(".popup_profile");
 const profileSubmit = document.getElementById("profile-submit");
@@ -7,34 +6,14 @@ let profileName = document.querySelector(".profile__name");
 let profileExplorer = document.querySelector(".profile__explorer");
 const inputName = document.querySelector(".popup__input_name");
 const inputAboutMe = document.querySelector(".popup__input_aboutme");
-
-buttonEdit.addEventListener("click", () => {
-  popupProfile.classList.add("popup_show");
-
-  inputName.value = profileName.textContent;
-  inputAboutMe.value = profileExplorer.textContent;
-});
-
-profileSubmit.addEventListener("click", (evt) => {
-  evt.preventDefault();
-
-  profileName.textContent = inputName.value;
-  profileExplorer.textContent = inputAboutMe.value;
-
-  popupProfile.classList.remove("popup_show");
-});
-
+//Variables del popup Add
 const buttonAdd = document.querySelector(".profile__content-add");
 const popupAdd = document.querySelector(".popup_add");
+const formAdd = document.getElementById("add-form");
 const addSubmit = document.getElementById("add-submit");
-
-buttonAdd.addEventListener("click", () => {
-  popupAdd.classList.add("popup_show");
-});
-
-//Guardar información de las tarjetas, tal como el título y la url de la imagen al hacer click en el botón de guardar
-//Al guardar la información debe de aparecer 1 nueva tarjeta en el primer espacio de la cuadrícula grid
-
+//Variables para crear las tarjetas, guardarlas, darle like y borrarlas
+const cardsContainer = document.querySelector(".elements");
+const popupImage = document.querySelector(".popup_image");
 const initialCards = [
   {
     name: "Bellas Artes, CDMX",
@@ -61,18 +40,58 @@ const initialCards = [
     link: "https://images.unsplash.com/photo-1496425745709-5f9297566b46?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXxaOFBqZHhJTnBBOHx8ZW58MHx8fHx8",
   },
 ];
-const cardsContainer = document.querySelector(".elements");
-const popupImage = document.querySelector(".popup_image");
+//Variables para cerrar los popup y la tarjeta ampliada
 const closeButtons = document.querySelectorAll(".popup__close");
 
-//Realizar una funciòn para crear una tarjeta que tenga de molde el template
+//Función para abrir el popup profile y que estén los datos de profile name y profile explorer en los input
+buttonEdit.addEventListener("click", () => {
+  openPopup(popupProfile);
+
+  inputName.value = profileName.textContent;
+  inputAboutMe.value = profileExplorer.textContent;
+});
+
+//Función para guardar los datos de los inputs en la parte del perfil y cerrarse al guardar.
+//Se queda pendiente una mejora de código como el submit del formAdd
+profileSubmit.addEventListener("click", (evt) => {
+  evt.preventDefault();
+
+  profileName.textContent = inputName.value;
+  profileExplorer.textContent = inputAboutMe.value;
+
+  popupProfile.classList.remove("popup_show");
+});
+
+//Función para abrir el popupAdd al darle click al button Add
+buttonAdd.addEventListener("click", () => {
+  openPopup(popupAdd);
+});
+
+//Función para crear una nueva tarjeta al darle click al id del button add-submit, se tiene que cerrar al dar click
+//Pendiente de realizar mejora para solo aceptar los valores que tiene el formulario
+//Pendiente de poner un # de caracteres en titleValue
+//Pendiente de que salga un mensaje de que hace falta valor correcto en los inputs
+formAdd.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const titleValue = event.target.elements.title.value;
+  const linkValue = event.target.elements.link.value;
+  const newCard = createCard(titleValue, linkValue);
+  cardsContainer.prepend(newCard);
+});
+
+//Función para crear las 6 tarjetas a partir de un template
+//Se añaden en el orden de la variable intialCards
 function createCard(name, link) {
   const templateCard = document.querySelector(".template");
+  //estoy clonando toda la informaciòn que contenga el elemento "element" en html
   const cardElement = templateCard.content
     .querySelector(".element")
-    .cloneNode(true); //estoy clonando toda la informaciòn que contenga el elemento "element" en html
-  cardElement.querySelector(".element__image").src = link; //igualo el contenido del elemento image al valor de link de la variable "initialCards"
-  cardElement.querySelector(".element__text").textContent = name; //igualo el contenido del elemento image al valor de link de la variable "initialCards"
+    .cloneNode(true);
+  //igualo el contenido del elemento image al valor de link de la variable "initialCards"
+  cardElement.querySelector(".element__image").src = link;
+  //igualo el contenido del elemento image al valor de link de la variable "initialCards"
+  cardElement.querySelector(".element__text").textContent = name;
+  //Al dar click a la tarjeta se genera un popup de la imagen y el título de la misma
   cardElement
     .querySelector(".element__image")
     .addEventListener("click", function () {
@@ -80,11 +99,13 @@ function createCard(name, link) {
       popupImage.querySelector(".popup__image").src = link;
       popupImage.querySelector(".popup__text").textContent = name;
     });
+  //Al dar click a trash se elimina la tarjeta
   cardElement
     .querySelector(".element__button-trash")
     .addEventListener("click", function () {
       cardElement.remove();
     });
+  //Al dar click a buttonLike se genera un like o dislike
   cardElement
     .querySelector(".element__button-like")
     .addEventListener("click", function (evt) {
@@ -93,21 +114,23 @@ function createCard(name, link) {
   return cardElement;
 }
 
-function openPopup(popup) {
-  popup.classList.add("popup_show");
-}
-
-function closePopup(popup) {
-  popup.classList.remove("popup_show");
-}
-
 //Formar un bucle para que se tomen los datos del objeto y se agreguen conforme al orden de apariciòn
+//Función para crear las 6 tarjetas sin escribir tanto código
 initialCards.forEach(function (element) {
   const newCard = createCard(element.name, element.link);
   cardsContainer.append(newCard);
 });
 
-//crear una funcion en la cual se cierren todos los botones
+//Función para abrir los popup con la clase popup_show
+function openPopup(popup) {
+  popup.classList.add("popup_show");
+}
+//Función para cerrar los popup con la clase popup_show
+function closePopup(popup) {
+  popup.classList.remove("popup_show");
+}
+
+//Funcion para cerrar todos los closeButtons al dar click
 closeButtons.forEach(function (element) {
   element.addEventListener("click", function () {
     closePopup(popupProfile);
