@@ -89,10 +89,11 @@
   cursor: pointer;
 }
 
-.popup__button-submit:disabled {
+.popup__button-submit_disabled {
   border: 1px solid #c4c4c4;
   background-color: transparent;
   color: #c4c4c4;
+  cursor: none;
 }
 
 .popup__close {

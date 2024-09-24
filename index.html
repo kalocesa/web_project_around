@@ -70,10 +70,12 @@
             />
           </button>
           <h2 class="popup__title">Editar perfil</h2>
-          <form id="profile-form" class="popup__form">
+          <form name="profile" class="popup__form">
             <input
               type="text"
               required
+              minlength="2"
+              maxlength="40"
               class="popup__input popup__input_name"
               id="name"
               name="nombre"
@@ -82,19 +84,15 @@
             <input
               type="text"
               required
+              minlength="2"
+              maxlength="200"
               class="popup__input popup__input_aboutme"
               id="aboutme"
-              name="Acerca de mí"
+              name="about"
               placeholder="Acerca de mí"
             />
+            <button type="submit" class="popup__button-submit">Guardar</button>
           </form>
-          <button
-            id="profile-submit"
-            value="Guardar"
-            class="popup__button-submit"
-          >
-            Guardar
-          </button>
         </div>
       </div>
       <div class="popup popup_add">
@@ -108,11 +106,11 @@
             />
           </button>
           <h2 class="popup__title">Nuevo lugar</h2>
-          <form id="add-form" class="popup__form">
+          <form name="add" class="popup__form">
             <input
               type="text"
               required
-              minlength="3"
+              minlength="2"
               maxlength="30"
               class="popup__input popup__input_title"
               id="title"
@@ -127,11 +125,7 @@
               name="link"
               placeholder="Imagen (URL)"
             />
-            <button
-              id="add-submit"
-              value="Guardar"
-              class="popup__button-submit"
-            >
+            <button id="add-submit" type="submit" class="popup__button-submit">
               Guardar
             </button>
           </form>

@@ -1,15 +1,16 @@
 //Variables del popup Profile
 const buttonEdit = document.querySelector(".profile__button-edit");
 const popupProfile = document.querySelector(".popup_profile");
-const profileSubmit = document.getElementById("profile-submit");
+const profileSubmit = document.querySelector(".popup__button-submit");
 let profileName = document.querySelector(".profile__name");
 let profileExplorer = document.querySelector(".profile__explorer");
-const inputName = document.querySelector(".popup__input_name");
-const inputAboutMe = document.querySelector(".popup__input_aboutme");
+const formProfile = document.forms.profile;
+const nameInput = profile.elements.name;
+const aboutInput = profile.elements.about;
 //Variables del popup Add
 const buttonAdd = document.querySelector(".profile__content-add");
 const popupAdd = document.querySelector(".popup_add");
-const formAdd = document.getElementById("add-form");
+const formAdd = document.forms.add;
 const addSubmit = document.getElementById("add-submit");
 //Variables para crear las tarjetas, guardarlas, darle like y borrarlas
 const cardsContainer = document.querySelector(".elements");
@@ -46,24 +47,44 @@ const closeButtons = document.querySelectorAll(".popup__close");
 //Función para abrir el popup profile y que estén los datos de profile name y profile explorer en los input
 buttonEdit.addEventListener("click", () => {
   openPopup(popupProfile);
-
-  inputName.value = profileName.textContent;
-  inputAboutMe.value = profileExplorer.textContent;
+  nameInput.value = profileName.textContent;
+  aboutInput.value = profileExplorer.textContent;
 });
 
-//Función para guardar los datos de los inputs en la parte del perfil y cerrarse al guardar.
-//Se queda pendiente una mejora de código como el submit del formAdd
-profileSubmit.addEventListener("click", (evt) => {
+//Función para guardar el contenido de los inputs en el formulario del perfil
+//Al dar click en el botón submit se cerrará el popup
+//Mientras los caracteres de los inputs no sean los correctos no se puede activar el botón de guardar
+formProfile.addEventListener("submit", function (evt) {
   evt.preventDefault();
-
-  profileName.textContent = inputName.value;
-  profileExplorer.textContent = inputAboutMe.value;
+  profileName.textContent = nameInput.value;
+  profileExplorer.textContent = aboutInput.value;
 
   popupProfile.classList.remove("popup_show");
+  setSubmitButtonProfile(false);
+});
+
+//Función para que el formulario del perfil se habilite o deshabilite en caso que sea valido o invalido.
+function setSubmitButtonProfile(isFormValid) {
+  if (isFormValid) {
+    profileSubmit.removeAttribute("disabled");
+    profileSubmit.classList.remove("popup__button-submit_disabled");
+  } else {
+    profileSubmit.setAttribute("disabled", true);
+    profileSubmit.classList.add("popup__button-submit_disabled");
+  }
+}
+
+//Función para validar el formulario solo si los inputs tienen el número de caracteres permitidos.
+formProfile.addEventListener("input", function (evt) {
+  const isValidName = nameInput.value.length > 2 && nameInput.value.length < 40;
+  const isValidAbout =
+    aboutInput.value.length > 2 && aboutInput.value.length < 200;
+  setSubmitButtonProfile(isValidName, isValidAbout);
 });
 
 //Función para abrir el popupAdd al darle click al button Add
 buttonAdd.addEventListener("click", () => {
+  setSubmitButtonAdd(false);
   openPopup(popupAdd);
 });
 
@@ -77,8 +98,28 @@ formAdd.addEventListener("submit", function (event) {
   const linkValue = event.target.elements.link.value;
   const newCard = createCard(titleValue, linkValue);
   cardsContainer.prepend(newCard);
+  setSubmitButtonAdd(false);
   closePopup(popupAdd);
   formAdd.reset();
+});
+
+//Función para que el formulario de las tarjetas se habilite o deshabilite en caso que sea valido o invalido.
+function setSubmitButtonAdd(isFormValid) {
+  if (isFormValid) {
+    addSubmit.removeAttribute("disabled");
+    addSubmit.classList.remove("popup__button-submit_disabled");
+  } else {
+    addSubmit.setAttribute("disabled", true);
+    addSubmit.classList.add("popup__button-submit_disabled");
+  }
+}
+
+//Función para validar el formulario solo si los inputs tienen el número de caracteres permitidos.
+formAdd.addEventListener("input", function (evt) {
+  const titleInput = add.elements.title;
+  const isValidTitle =
+    titleInput.value.length > 2 && titleInput.value.length < 30;
+  setSubmitButtonAdd(isValidTitle);
 });
 
 //Función para crear las 6 tarjetas a partir de un template
