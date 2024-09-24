@@ -70,8 +70,15 @@
   margin-top: 29px;
 }
 
-.popup__input:focus {
-  outline: none;
+.popup__input {
+  outline-color: lightblue;
+}
+
+.popup__span {
+  font-size: 14px;
+  font-weight: 400;
+  line-break: 16px;
+  color: red;
 }
 
 .popup__button-submit {
