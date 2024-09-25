@@ -53,7 +53,6 @@ buttonEdit.addEventListener("click", () => {
 
 //Función para abrir el popupAdd al darle click al button Add
 buttonAdd.addEventListener("click", () => {
-  setSubmitButtonAdd(false);
   openPopup(popupAdd);
 });
 
@@ -66,7 +65,6 @@ formProfile.addEventListener("submit", function (evt) {
   profileExplorer.textContent = aboutInput.value;
 
   popupProfile.classList.remove("popup_show");
-  setSubmitButtonProfile(false);
 });
 
 //Función para crear una nueva tarjeta al darle click al id del button add-submit, se tiene que cerrar al dar click
@@ -76,7 +74,6 @@ formAdd.addEventListener("submit", function (event) {
   const linkValue = event.target.elements.link.value;
   const newCard = createCard(titleValue, linkValue);
   cardsContainer.prepend(newCard);
-  setSubmitButtonAdd(false);
   closePopup(popupAdd);
   formAdd.reset();
 });
@@ -164,7 +161,6 @@ overlays.forEach((overlay) => {
 //muestra el error
 const showInputError = (formElement, inputElement, errorMessage) => {
   //función para el form, input y el mensaje de error
-  console.log(inputElement.id);
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add("popup__input_type_error"); //se le añade la clase que muestra el borde rojo
   errorElement.textContent = errorMessage;
@@ -179,7 +175,6 @@ const hideInputError = (formElement, inputElement) => {
 };
 //valida el formulario y el input para mostrar o esconder el error
 const checkInputValidity = (formElement, inputElement) => {
-  console.log(inputElement);
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
