@@ -51,6 +51,12 @@ buttonEdit.addEventListener("click", () => {
   aboutInput.value = profileExplorer.textContent;
 });
 
+//Función para abrir el popupAdd al darle click al button Add
+buttonAdd.addEventListener("click", () => {
+  setSubmitButtonAdd(false);
+  openPopup(popupAdd);
+});
+
 //Función para guardar el contenido de los inputs en el formulario del perfil
 //Al dar click en el botón submit se cerrará el popup
 //Mientras los caracteres de los inputs no sean los correctos no se puede activar el botón de guardar
@@ -61,6 +67,18 @@ formProfile.addEventListener("submit", function (evt) {
 
   popupProfile.classList.remove("popup_show");
   setSubmitButtonProfile(false);
+});
+
+//Función para crear una nueva tarjeta al darle click al id del button add-submit, se tiene que cerrar al dar click
+formAdd.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const titleValue = event.target.elements.title.value;
+  const linkValue = event.target.elements.link.value;
+  const newCard = createCard(titleValue, linkValue);
+  cardsContainer.prepend(newCard);
+  setSubmitButtonAdd(false);
+  closePopup(popupAdd);
+  formAdd.reset();
 });
 
 //Función para que el formulario del perfil se habilite o deshabilite en caso que sea valido o invalido.
@@ -74,35 +92,6 @@ function setSubmitButtonProfile(isFormValid) {
   }
 }
 
-//Función para validar el formulario solo si los inputs tienen el número de caracteres permitidos.
-formProfile.addEventListener("input", function (evt) {
-  const isValidName = nameInput.value.length > 2 && nameInput.value.length < 40;
-  const isValidAbout =
-    aboutInput.value.length > 2 && aboutInput.value.length < 200;
-  setSubmitButtonProfile(isValidName, isValidAbout);
-});
-
-//Función para abrir el popupAdd al darle click al button Add
-buttonAdd.addEventListener("click", () => {
-  setSubmitButtonAdd(false);
-  openPopup(popupAdd);
-});
-
-//Función para crear una nueva tarjeta al darle click al id del button add-submit, se tiene que cerrar al dar click
-//Pendiente de realizar mejora para solo aceptar los valores que tiene el formulario
-//Pendiente de poner un # de caracteres en titleValue
-//Pendiente de que salga un mensaje de que hace falta valor correcto en los inputs
-formAdd.addEventListener("submit", function (event) {
-  event.preventDefault();
-  const titleValue = event.target.elements.title.value;
-  const linkValue = event.target.elements.link.value;
-  const newCard = createCard(titleValue, linkValue);
-  cardsContainer.prepend(newCard);
-  setSubmitButtonAdd(false);
-  closePopup(popupAdd);
-  formAdd.reset();
-});
-
 //Función para que el formulario de las tarjetas se habilite o deshabilite en caso que sea valido o invalido.
 function setSubmitButtonAdd(isFormValid) {
   if (isFormValid) {
@@ -113,6 +102,14 @@ function setSubmitButtonAdd(isFormValid) {
     addSubmit.classList.add("popup__button-submit_disabled");
   }
 }
+
+//Función para validar el formulario solo si los inputs tienen el número de caracteres permitidos.
+formProfile.addEventListener("input", function (evt) {
+  const isValidName = nameInput.value.length > 2 && nameInput.value.length < 40;
+  const isValidAbout =
+    aboutInput.value.length > 2 && aboutInput.value.length < 200;
+  setSubmitButtonProfile(isValidName, isValidAbout);
+});
 
 //Función para validar el formulario solo si los inputs tienen el número de caracteres permitidos.
 formAdd.addEventListener("input", function (evt) {
@@ -167,10 +164,12 @@ initialCards.forEach(function (element) {
 //Función para abrir los popup con la clase popup_show
 function openPopup(popup) {
   popup.classList.add("popup_show");
+  document.addEventListener("keydown", handleEscEvent);
 }
 //Función para cerrar los popup con la clase popup_show
 function closePopup(popup) {
   popup.classList.remove("popup_show");
+  document.removeEventListener("keydown", handleEscEvent);
 }
 
 //Funcion para cerrar todos los closeButtons al dar click
@@ -181,3 +180,89 @@ closeButtons.forEach(function (element) {
     closePopup(popupImage);
   });
 });
+
+function handleEscEvent(evt) {
+  if (evt.key === "Escape") {
+    closePopup(popupProfile);
+    closePopup(popupAdd);
+    closePopup(popupImage);
+  }
+}
+const overlays = document.querySelectorAll(".popup__background");
+
+overlays.forEach((overlay) => {
+  overlay.addEventListener("click", () => {
+    closePopup(popupProfile);
+    closePopup(popupAdd);
+    closePopup(popupImage);
+  });
+});
+
+//prueba
+
+/*const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add("popup__input-form_error");
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("popup__input-text_error");
+};
+
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove("popup__input-form_error");
+  errorElement.classList.remove("popup__input-text_error");
+  errorElement.textContent = "";
+};
+
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+  console.log(checkInputValidity);
+};
+
+const invalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+const toggleButton = (inputList, buttonElement) => {
+  console.log(invalidInput(inputList));
+  if (invalidInput(inputList)) {
+    buttonElement.classList.add("popup__button-submit_disabled");
+  } else {
+    buttonElement.classList.remove("popup__button-submit_disabled");
+  }
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
+  const buttonElement = formElement.querySelector(".popup__button-submit");
+  toggleButton(inputList, buttonElement);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", function () {
+      checkInputValidity(formElement, inputElement);
+      toggleButton(inputList, buttonElement);
+    });
+  });
+};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll(".popupform"));
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", function (evt) {
+      evt.preventDefault();
+    });
+  });
+};
+
+enableValidation();
+
+form.addEventListener("submit", function (evt) {
+  evt.preventDefault();
+  closePopup(popupAdd);
+  closePopup(popupProfile);
+});*/
