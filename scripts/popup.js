@@ -81,44 +81,6 @@ formAdd.addEventListener("submit", function (event) {
   formAdd.reset();
 });
 
-//Función para que el formulario del perfil se habilite o deshabilite en caso que sea valido o invalido.
-function setSubmitButtonProfile(isFormValid) {
-  if (isFormValid) {
-    profileSubmit.removeAttribute("disabled");
-    profileSubmit.classList.remove("popup__button-submit_disabled");
-  } else {
-    profileSubmit.setAttribute("disabled", true);
-    profileSubmit.classList.add("popup__button-submit_disabled");
-  }
-}
-
-//Función para que el formulario de las tarjetas se habilite o deshabilite en caso que sea valido o invalido.
-function setSubmitButtonAdd(isFormValid) {
-  if (isFormValid) {
-    addSubmit.removeAttribute("disabled");
-    addSubmit.classList.remove("popup__button-submit_disabled");
-  } else {
-    addSubmit.setAttribute("disabled", true);
-    addSubmit.classList.add("popup__button-submit_disabled");
-  }
-}
-
-//Función para validar el formulario solo si los inputs tienen el número de caracteres permitidos.
-formProfile.addEventListener("input", function (evt) {
-  const isValidName = nameInput.value.length > 2 && nameInput.value.length < 40;
-  const isValidAbout =
-    aboutInput.value.length > 2 && aboutInput.value.length < 200;
-  setSubmitButtonProfile(isValidName, isValidAbout);
-});
-
-//Función para validar el formulario solo si los inputs tienen el número de caracteres permitidos.
-formAdd.addEventListener("input", function (evt) {
-  const titleInput = add.elements.title;
-  const isValidTitle =
-    titleInput.value.length > 2 && titleInput.value.length < 30;
-  setSubmitButtonAdd(isValidTitle);
-});
-
 //Función para crear las 6 tarjetas a partir de un template
 //Se añaden en el orden de la variable intialCards
 function createCard(name, link) {
@@ -198,42 +160,46 @@ overlays.forEach((overlay) => {
   });
 });
 
-//prueba
-
-/*const showInputError = (formElement, inputElement, errorMessage) => {
+//Validación de formularios
+//muestra el error
+const showInputError = (formElement, inputElement, errorMessage) => {
+  //función para el form, input y el mensaje de error
+  console.log(inputElement.id);
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add("popup__input-form_error");
+  inputElement.classList.add("popup__input_type_error"); //se le añade la clase que muestra el borde rojo
   errorElement.textContent = errorMessage;
-  errorElement.classList.add("popup__input-text_error");
+  errorElement.classList.add("popup__input-error_active"); //se le añade la clase con el mensaje del input id
 };
-
+//esconde el error
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove("popup__input-form_error");
-  errorElement.classList.remove("popup__input-text_error");
+  inputElement.classList.remove("popup__input_type_error");
+  errorElement.classList.remove("popup__input-error_active");
   errorElement.textContent = "";
 };
-
+//valida el formulario y el input para mostrar o esconder el error
 const checkInputValidity = (formElement, inputElement) => {
+  console.log(inputElement);
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
     hideInputError(formElement, inputElement);
   }
-  console.log(checkInputValidity);
 };
 
-const invalidInput = (inputList) => {
+const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
 };
 
-const toggleButton = (inputList, buttonElement) => {
-  console.log(invalidInput(inputList));
-  if (invalidInput(inputList)) {
+const toggleButtonState = (inputList, buttonElement) => {
+  console.log(hasInvalidInput(inputList));
+  if (hasInvalidInput(inputList)) {
+    buttonElement.setAttribute("disabled", true);
     buttonElement.classList.add("popup__button-submit_disabled");
   } else {
+    buttonElement.removeAttribute("disabled");
     buttonElement.classList.remove("popup__button-submit_disabled");
   }
 };
@@ -241,28 +207,23 @@ const toggleButton = (inputList, buttonElement) => {
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
   const buttonElement = formElement.querySelector(".popup__button-submit");
-  toggleButton(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement);
-      toggleButton(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
 
 const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(".popupform"));
+  const formList = Array.from(document.querySelectorAll(".popup__form"));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
     });
+    setEventListeners(formElement); //
   });
 };
 
 enableValidation();
-
-form.addEventListener("submit", function (evt) {
-  evt.preventDefault();
-  closePopup(popupAdd);
-  closePopup(popupProfile);
-});*/
