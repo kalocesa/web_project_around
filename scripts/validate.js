@@ -1,14 +1,7 @@
 /*// habilitar la validación llamando a enableValidation()
 // pasar todas las configuraciones en la llamada
 
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-});*/
+*/
 
 //Validación de formularios
 //muestra el error
@@ -64,14 +57,22 @@ const setEventListeners = (formElement) => {
   });
 };
 
-const enableValidation = () => {
+const enableValidation = (formConfig) => {
   const formList = Array.from(document.querySelectorAll(".popup__form"));
+
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
     });
-    setEventListeners(formElement); //
+    setEventListeners(formElement, formConfig); //
   });
 };
 
-enableValidation();
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button-submit",
+  inactiveButtonClass: "popup__button-submit_disabled",
+  inputErrorClass: "popup__input-error",
+  errorClass: "popup__input-error_active",
+});
