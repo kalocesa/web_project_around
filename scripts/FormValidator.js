@@ -1,8 +1,24 @@
-/*// habilitar la validación llamando a enableValidation()
-// pasar todas las configuraciones en la llamada
+/*Crea la clase FormValidator, que establece la configuración 
+para validar los campos del formulario de acuerdo con 
+los siguientes requisitos:*/
 
-*/
+class FormValidator {
+  /*Tu constructor tiene dos parámetros. El primer parámetro es un objeto de configuración 
+  que almacena los selectores y las clases del formulario, y el segundo toma un elemento 
+  del formulario a validar.*/
+  constructor(selectors, formValidity) {
+    this.selectors = selectors;
+    this.formValidity = formValidity;
+  }
 
+  /*Tiene métodos privados para procesar el formulario, que incluyen: 
+comprobar la validez del campo, cambiar el estado del botón Submit, 
+y agregar todos los controladores necesarios.*/
+
+  //Tiene un método público enableValidation(), que activa la validación del formulario.
+}
+
+//Crea una instancia de la clase FormValidator para cada formulario que deba ser validado.
 //Validación de formularios
 //muestra el error
 const showInputError = (formElement, inputElement, errorMessage) => {
