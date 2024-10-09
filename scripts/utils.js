@@ -1,3 +1,15 @@
+const formAdd = document.forms.add;
+//Función para crear una nueva tarjeta al darle click al id del button add-submit, se tiene que cerrar al dar click
+formAdd.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const titleValue = event.target.elements.title.value;
+  const linkValue = event.target.elements.link.value;
+  const newCard = createCard(titleValue, linkValue);
+  cardsContainer.prepend(newCard);
+  closePopup(popupAdd);
+  formAdd.reset();
+});
+
 /*contendrá los controladores de eventos y 
 la función que abre/cierra las ventanas modales.*/
 
@@ -23,22 +35,14 @@ buttonAdd.addEventListener("click", () => {
   openPopup(popupAdd);
 });
 
-const popupImage = document.querySelector(".popup_image");
-const cardImage = document.querySelector(".element__image");
-cardImage.addEventListener("click", () => {
-  openPopup(popupImage);
-  popupImage.querySelector(".popup__image").src = link;
-  popupImage.querySelector(".popup__text").textContent = name;
-});
-
 //Función para abrir los popup con la clase popup_show
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_show");
   document.addEventListener("keydown", handleEscEvent);
 }
 
 //Función para cerrar los popup con la clase popup_show
-function closePopup(popup) {
+export function closePopup(popup) {
   popup.classList.remove("popup_show");
   document.removeEventListener("keydown", handleEscEvent);
 }
@@ -82,17 +86,3 @@ formProfile.addEventListener("submit", function (evt) {
 
   popupProfile.classList.remove("popup_show");
 });
-
-const formAdd = document.forms.add;
-//Función para crear una nueva tarjeta al darle click al id del button add-submit, se tiene que cerrar al dar click
-formAdd.addEventListener("submit", function (event) {
-  event.preventDefault();
-  const titleValue = event.target.elements.title.value;
-  const linkValue = event.target.elements.link.value;
-  const newCard = createCard(titleValue, linkValue);
-  cardsContainer.prepend(newCard);
-  closePopup(popupAdd);
-  formAdd.reset();
-});
-
-import { cardsContainer, createCard } from "./Card.js";
