@@ -29,7 +29,7 @@ export default class Card {
     this._element
       .querySelector(".element__button-trash")
       .addEventListener("click", () => {
-        closePopup(popupImage);
+        this._element.remove();
       });
 
     this._element
