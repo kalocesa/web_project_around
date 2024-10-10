@@ -1,7 +1,7 @@
 export default class FormValidator {
   constructor(formElement, formValidity) {
-    this.formElement = formElement;
-    this.formValidity = formValidity;
+    this._formElement = formElement;
+    this._formValidity = formValidity;
   }
   _showInputError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -49,9 +49,9 @@ export default class FormValidator {
   _setEventListeners(formElement) {
     const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
     const buttonElement = formElement.querySelector(".popup__button-submit");
-    toggleButtonState(inputList, buttonElement);
+    this._toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", function () {
+      inputElement.addEventListener("input", () => {
         this._checkInputValidity(formElement, inputElement);
         this._toggleButtonState(inputList, buttonElement);
       });

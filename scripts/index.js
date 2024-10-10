@@ -1,5 +1,6 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+import { formProfile, formAdd } from "./utils.js";
 
 const cardsContainer = document.querySelector(".elements");
 const initialCards = [
@@ -30,16 +31,19 @@ const initialCards = [
 ];
 
 initialCards.forEach((item) => {
-  const newCard = new Card(item.name, item.link, "#template");
+  const newCard = new Card(item.name, item.link, ".template");
   const cardElement = newCard.generateCard();
   cardsContainer.append(cardElement);
 });
 
-enableValidation({
+const settings = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button-submit",
   inactiveButtonClass: "popup__button-submit_disabled",
   inputErrorClass: "popup__input_type-error",
   errorClass: "popup__input-error_active",
-});
+};
+
+const formValidator = new FormValidator(formProfile, settings); //formCrearTarjeta cambiar
+formValidator.enableValidation();
