@@ -36,7 +36,6 @@ export default class FormValidator {
   }
 
   _toggleButtonState(inputList, buttonElement) {
-    console.log(this._hasInvalidInput(inputList));
     if (this._hasInvalidInput(inputList)) {
       buttonElement.setAttribute("disabled", true);
       buttonElement.classList.add(this._formValidity.inactiveButtonClass);

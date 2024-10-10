@@ -2,7 +2,7 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import { formProfile, formAdd } from "./utils.js";
 
-const cardsContainer = document.querySelector(".elements");
+export const cardsContainer = document.querySelector(".elements");
 const initialCards = [
   {
     name: "Bellas Artes, CDMX",
@@ -45,5 +45,8 @@ const settings = {
   errorClass: "popup__input-error_active",
 };
 
-const formValidator = new FormValidator(formProfile, settings); //formCrearTarjeta cambiar
-formValidator.enableValidation();
+const profile = new FormValidator(formProfile, settings);
+profile.enableValidation();
+
+const add = new FormValidator(formAdd, settings);
+add.enableValidation();

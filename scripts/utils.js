@@ -1,3 +1,5 @@
+import Card from "./Card.js";
+import { cardsContainer } from "./index.js";
 const buttonEdit = document.querySelector(".profile__button-edit");
 let profileName = document.querySelector(".profile__name");
 let profileExplorer = document.querySelector(".profile__explorer");
@@ -64,12 +66,13 @@ formProfile.addEventListener("submit", function (evt) {
 });
 
 export const formAdd = document.forms.add;
+const titleInput = add.elements.title;
+const linkInput = add.elements.link;
 formAdd.addEventListener("submit", function (event) {
   event.preventDefault();
-  const titleValue = event.target.elements.title.value;
-  const linkValue = event.target.elements.link.value;
-  const newCard = createCard(titleValue, linkValue);
-  cardsContainer.prepend(newCard);
+  const newCard = new Card(titleInput.value, linkInput.value, ".template");
+  const cardElement = newCard.generateCard();
+  cardsContainer.prepend(cardElement);
   closePopup(popupAdd);
   formAdd.reset();
 });
