@@ -1,6 +1,9 @@
+import { formAdd, formProfile } from "./utils.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-import { formProfile, formAdd } from "./utils.js";
+import PopupWithForm from "./PopupWithForm.js";
+import PopupWithImage from "./PopupWithImage.js";
+import UserInfo from "./UserInfo.js";
 
 export const cardsContainer = document.querySelector(".elements");
 const initialCards = [
@@ -45,8 +48,35 @@ const settings = {
   errorClass: "popup__input-error_active",
 };
 
+//popup de añadir tarjeta
+const contentElements = document.querySelector(".elements");
+const popupAdd = new PopupWithForm(".popup_add", (values) => {
+  cardElement(values, contentElements);
+});
+popupAdd.setEventListeners();
+
+//popup del perfil
+const popupProfile = new PopupWithForm(".popup_profile", (values) => {
+  //Aquí va UserInfo.
+});
+popupProfile.setEventListeners();
+
+//Abrir popup del perfil
+const buttonProfile = document.querySelector(".profile__button-edit");
+buttonProfile.addEventListener("click", () => {
+  popupProfile.open();
+});
+
+//Abrir popup de crear tarjetas
+const buttonAdd = document.querySelector(".profile__content-add");
+buttonAdd.addEventListener("click", () => {
+  popupAdd.open();
+});
+
+//validación de formularios
+//form del perfil
 const profile = new FormValidator(formProfile, settings);
 profile.enableValidation();
-
+//form de crear tarjetas
 const add = new FormValidator(formAdd, settings);
 add.enableValidation();

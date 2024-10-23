@@ -12,43 +12,45 @@ debe cerrarse cuando los usuarios hacen clic en el área sombreada del formulari
 
 export default class Popup {
   constructor(popupSelector) {
-    this._popupSelector = popupSelector;
+    this._popupElement = document.querySelector(popupSelector);
   }
 
   open() {
-    this._popupSelector.classList.add("popup_show");
-    document.addEventListener("keydown", this._handleEscClose);
+    this._popupElement.classList.add("popup_show");
+    this._handleEscClose();
   }
 
   close() {
-    this._popupSelector.classList.remove("popup_show");
-    document.removeEventListener("keydown", this._handleEscClose);
+    this._popupElement.classList.remove("popup_show");
   }
 
-  _handleEscClose(evt) {
-    if (evt.key === "Escape") {
-      closePopup(popupProfile);
-      closePopup(popupAdd);
-      closePopup(popupImage);
-    }
+  _handleEscClose() {
+    document.addEventListener("keyup", (evt) => {
+      if (evt.key === "Escape") {
+        this._popupElement.classList.remove("popup_show");
+      }
+    });
   }
 
-  setEventListener() {
-    evt.preventDefault();
-    this._element
-      .querySelectorAll(".popup__background")
-      .addEventListener("click", () => {
-        closePopup(popupProfile);
-        closePopup(popupAdd);
-        closePopup(popupImage);
-      });
+  setEventListeners() {
+    const closeButton = this._popupElement.querySelector(".popup__close");
+    closeButton.addEventListener("click", () => {
+      this.close();
+    });
 
-    this._element
-      .querySelectorAll(".popup__close")
-      .addEventListener("click", () => {
-        closePopup(popupProfile);
-        closePopup(popupAdd);
-        closePopup(popupImage);
-      });
+    const closeBackground =
+      this._popupElement.querySelector(".popup__background");
+    closeBackground.addEventListener("click", () => {
+      this.close();
+    });
   }
 }
+
+/* instanciar
+const popupProfile = new Popup('#popupProfile');
+const popupAdd = new Popup('#popupAdd');
+const popupImage = new Popup('#popupImage');
+
+// Para abrir el popup, por ejemplo:
+popupProfile.open();
+*/

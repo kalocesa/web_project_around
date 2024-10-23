@@ -1,21 +1,30 @@
-/*Creación de la clase PopupWithForm
-Crea PopupWithForm como una clase hija de Popup. 
-La clase PopupWithForm debe cumplir con los siguientes requisitos:
-Lleva un callback del envío del formulario al constructor, 
-así como el selector popup.
-Almacena un método privado llamado _getInputValues(), que 
-recopila datos de todos los campos de entrada.
-Modifica el método padre setEventListeners(). El método setEventListeners() 
-de la clase PopupWithForm debe agregar al formulario un controlador de 
-eventos submit y el detector de eventos click para el icono cerrar.
-Modifica el método padre close() para reiniciar el formulario cuando 
-se ha cerrado el popup.
-Crea una instancia de la clase PopupWithForm para cada popup.*/
-
-import Popup from "./Popup";
+import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  _getInputValues() {}
+  constructor(popupSelector, handleFormSubmit) {
+    super(popupSelector);
+    this._handleFormSubmit = handleFormSubmit;
+    this._formElement = this._popupElement.querySelector("form");
+  }
 
-  setEventListeners() {}
+  _getInputValues() {
+    let values = {};
+    const inputList = this._formElement.querySelectorAll("input");
+    inputList.forEach((input) => {
+      values[input.name] = input.value;
+    });
+    return values;
+  }
+
+  setEventListeners() {
+    super.setEventListeners();
+    this._formElement.addEventListener("submit", () => {
+      this._handleFormSubmit(this._getInputValues());
+      this.close();
+    });
+  }
+
+  close() {
+    super.close();
+  }
 }

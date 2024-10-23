@@ -1,5 +1,3 @@
-import { openPopup, closePopup, popupImage } from "./utils.js";
-
 export default class Card {
   constructor(name, link, cardSelector) {
     this._name = name;
@@ -41,9 +39,11 @@ export default class Card {
     this._element
       .querySelector(".element__image")
       .addEventListener("click", () => {
-        openPopup(popupImage);
-        popupImage.querySelector(".popup__image").src = this._link;
-        popupImage.querySelector(".popup__text").textContent = this._name;
+        this._element.open();
+        this._element.querySelector(".element__image").src = this._link;
+        this._element.querySelector(".element__text").textContent = this._name;
       });
   }
+
+  handleCardClick() {}
 }

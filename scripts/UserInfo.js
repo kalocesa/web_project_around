@@ -10,11 +10,33 @@ los que es necesario mostrar los datos del usuario en el formulario abierto.
 Almacena un método público llamado setUserInfo(), que toma los datos del nuevo 
 usuario y los agrega en la página.
 */
+import { nameInput, aboutInput, popupProfile } from "./utils.js";
 
 export default class UserInfo {
-  constructor(name, title) {}
+  constructor(name, title) {
+    this._name = name;
+    this._title = title;
+  }
 
-  getUserInfo() {}
+  getUserInfo() {
+    this._element
+      .querySelector(".profile__button-edit")
+      .addEventListener("click", () => {
+        openPopup(popupProfile);
+        nameInput.value = this._name.textContent;
+        aboutInput.value = this._title.textContent;
+      });
+  }
 
-  setUserInfo() {}
-}
+  setUserInfo() {
+    this._element
+      .querySelector(".popup__form-profile")
+      .addEventListener("submit", (evt) => {
+        evt.preventDefault();
+        this._name.textContent = nameInput.value;
+        this._title.textContent = aboutInput.value;
+
+        popupProfile.classList.remove("popup_show");
+      });
+  }
+} //

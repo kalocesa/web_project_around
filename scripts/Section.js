@@ -18,13 +18,15 @@ de callback y lo inserta en el contenedor.*/
 
 export default class Section {
   constructor({ items, renderer }, cardContainer) {
-    this._renderedItems = data;
-    this._renderer = renderer;
-    this._container = document.querySelector(cardContainer);
+    this._items = items; //array de datos
+    this._renderer = renderer; //funcion crea y renderiza los datos de la página.
+    this._container = document.querySelector(cardContainer); //donde se agregan los elementos de la tarjeta
   }
 
-  rendered() {
-    this._renderedItems.forEach((item) => this._renderer(item));
+  renderedItems() {
+    this._items.forEach((item) => {
+      this._renderer(item);
+    });
   }
 
   addItem(element) {
