@@ -1,13 +1,13 @@
-import Card from "./Card.js";
-let profileName = document.querySelector(".profile__name");
-let profileExplorer = document.querySelector(".profile__explorer");
+//let profileName = document.querySelector(".profile__name");
+//let profileExplorer = document.querySelector(".profile__explorer");
 export const nameInput = profile.elements.name;
-export const aboutInput = profile.elements.about;
+export const aboutInput = profile.elements.description;
 export const popupProfile = document.querySelector(".popup_profile");
 export const cardsContainer = document.querySelector(".elements");
 export const popupImage = document.querySelector(".popup_image");
 export const popupAdd = document.querySelector(".popup_add");
 export const formProfile = document.forms.profile;
+export const formAdd = document.forms.add;
 
 /*formProfile.addEventListener("submit", function (evt) {
   evt.preventDefault();
@@ -17,9 +17,8 @@ export const formProfile = document.forms.profile;
   popupProfile.classList.remove("popup_show");
 });*/
 
-export const formAdd = document.forms.add;
-const titleInput = add.elements.title;
-const linkInput = add.elements.link;
+//const titleInput = add.elements.title;
+//const linkInput = add.elements.link;
 
 /*formAdd.addEventListener("submit", function (event) {
   event.preventDefault();
