@@ -5,27 +5,18 @@ una imagen al popup y el correspondiente atributo de imagen
 src junto con una leyenda para la imagen.*/
 
 import Popup from "./Popup.js";
-
-export const popupImage = document.querySelector(".popup_image");
-
 export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    this._image = this._popupElement.querySelector(".popup__image");
-    this._text = this._popupElement.querySelector(".popup__text");
   }
 
-  open() {
+  open(imageName, imageLink) {
     super.open();
-    this._popupElement
-      .querySelector(".element__image")
-      .addEventListener("click", () => {
-        popupImage.src = this._image;
-        popupImage.textContent = this._text;
-      });
-  }
+    const imageElement = this.popupElement.querySelector(".popup__image");
+    const nameElement = this.popupElement.querySelector(".popup__text");
 
-  close() {
-    super.close();
+    imageElement.src = imageLink;
+    imageElement.alt = imageName;
+    nameElement.textContent = imageName;
   }
 }

@@ -12,45 +12,36 @@ debe cerrarse cuando los usuarios hacen clic en el área sombreada del formulari
 
 export default class Popup {
   constructor(popupSelector) {
-    this._popupElement = document.querySelector(popupSelector);
+    this.popupElement = document.querySelector(popupSelector);
   }
 
   open() {
-    this._popupElement.classList.add("popup_show");
+    this.popupElement.classList.add("popup_show");
     this._handleEscClose();
   }
 
   close() {
-    this._popupElement.classList.remove("popup_show");
+    this.popupElement.classList.remove("popup_show");
   }
 
   _handleEscClose() {
     document.addEventListener("keyup", (evt) => {
       if (evt.key === "Escape") {
-        this._popupElement.classList.remove("popup_show");
+        this.popupElement.classList.remove("popup_show");
       }
     });
   }
 
   setEventListeners() {
-    const closeButton = this._popupElement.querySelector(".popup__close");
+    const closeButton = this.popupElement.querySelector(".popup__close");
     closeButton.addEventListener("click", () => {
       this.close();
     });
 
     const closeBackground =
-      this._popupElement.querySelector(".popup__background");
+      this.popupElement.querySelector(".popup__background");
     closeBackground.addEventListener("click", () => {
       this.close();
     });
   }
 }
-
-/* instanciar
-const popupProfile = new Popup('#popupProfile');
-const popupAdd = new Popup('#popupAdd');
-const popupImage = new Popup('#popupImage');
-
-// Para abrir el popup, por ejemplo:
-popupProfile.open();
-*/

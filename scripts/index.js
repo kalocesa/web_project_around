@@ -1,11 +1,16 @@
-import { formAdd, formProfile } from "./utils.js";
+import {
+  formAdd,
+  formProfile,
+  cardsContainer,
+  nameInput,
+  aboutInput,
+} from "./utils.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import PopupWithForm from "./PopupWithForm.js";
 import PopupWithImage from "./PopupWithImage.js";
 import UserInfo from "./UserInfo.js";
 
-export const cardsContainer = document.querySelector(".elements");
 const initialCards = [
   {
     name: "Bellas Artes, CDMX",
@@ -34,7 +39,9 @@ const initialCards = [
 ];
 
 initialCards.forEach((item) => {
-  const newCard = new Card(item.name, item.link, ".template");
+  const newCard = new Card(item.name, item.link, ".template", () => {
+    popupWithImage.open(item.name, item.link);
+  });
   const cardElement = newCard.generateCard();
   cardsContainer.append(cardElement);
 });
@@ -48,23 +55,27 @@ const settings = {
   errorClass: "popup__input-error_active",
 };
 
-//popup de añadir tarjeta
-const contentElements = document.querySelector(".elements");
-const popupAdd = new PopupWithForm(".popup_add", (values) => {
-  cardElement(values, contentElements);
-});
-popupAdd.setEventListeners();
-
 //popup del perfil
-const popupProfile = new PopupWithForm(".popup_profile", (values) => {
-  //Aquí va UserInfo.
+const popupProfile = new PopupWithForm(".popup_profile", (data) => {
+  const { name, about } = data;
+  userInfo.setUserInfo(name, about);
 });
 popupProfile.setEventListeners();
+
+//popup de añadir tarjeta
+const popupAdd = new PopupWithForm(".popup_add", (values) => {
+  //el metodo que crea cada una de las cartas (values, el contenedor de las cartas)
+  initialCards(values, cardsContainer);
+});
+popupAdd.setEventListeners();
 
 //Abrir popup del perfil
 const buttonProfile = document.querySelector(".profile__button-edit");
 buttonProfile.addEventListener("click", () => {
   popupProfile.open();
+  const profileValues = userInfo.getUserInfo();
+  nameInput.value = profileValues.name;
+  aboutInput.value = profileValues.about;
 });
 
 //Abrir popup de crear tarjetas
@@ -80,3 +91,8 @@ profile.enableValidation();
 //form de crear tarjetas
 const add = new FormValidator(formAdd, settings);
 add.enableValidation();
+
+const popupWithImage = new PopupWithImage(".popup_image");
+popupWithImage.setEventListeners();
+
+const userInfo = new UserInfo(".profile__name", ".profile__explorer");
