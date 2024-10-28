@@ -11,6 +11,7 @@ La pàgina web de Around to MX muestra el perfil de un explorador en conjunto co
 - GitBash
 - GitHub Pages
 - Figma
+- Webpack
 
 ## Link al proyecto:
 
