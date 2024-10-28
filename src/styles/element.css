@@ -64,11 +64,13 @@
 .element__button-like {
   max-width: 21px;
   width: 100%;
+  background-image: url(../images/dislikeButton.svg);
+  background-repeat: no-repeat;
 }
 
 .element__button-dislike {
   max-width: 21px;
   width: 100%;
-  background-image: url(../images/like\ button.svg);
+  background-image: url(../images/likeButton.svg);
   background-repeat: no-repeat;
 }
