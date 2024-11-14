@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="./favicon.ico" />
+    <link rel="icon" href="./images/favicon.ico" />
     <meta name="description" content="Around to MX" />
     <meta name="author" content="Katia Sandoval" />
     <meta name="keywords" content="html, css, javascript" />
@@ -34,12 +34,22 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            id="image-avatar"
-            src="<%=require('./images/avatar.jpg')%>"
-            alt="avatar"
-            class="profile__avatar"
-          />
+          <div class="profile__content-avatar">
+            <img
+              id="image-avatar"
+              src="<%=require('./images/avatar.jpg')%>"
+              alt="avatar"
+              class="profile__avatar"
+            />
+            <div class="profile__content-edit_profile">
+              <img
+                id="image-avatar-edit"
+                src="<%=require('./images/pencil.svg')%>"
+                alt="avatar-edit"
+                class="profile__avatar-edit"
+              />
+            </div>
+          </div>
           <div class="profile__content-edit">
             <h1 class="profile__name">Katia Sandoval</h1>
             <img
@@ -165,6 +175,53 @@
         <p class="popup__text"></p>
       </div>
     </div>
+    <div class="popup popup_delete">
+      <div class="popup__background"></div>
+      <div class="popup__content">
+        <button class="popup__close">
+          <img
+            id="image-closeIcon"
+            src="<%=require('./images/closeIcon.svg')%>"
+            alt="boton de cerrar"
+            class="popup__button-close"
+          />
+        </button>
+        <h2 class="popup__title popup__title-delete">¿Estás seguro?</h2>
+        <form name="delete" class="popup__form" novalidate>
+          <button id="add-submit" type="submit" class="popup__button-submit">
+            Sí
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_avatar">
+      <div class="popup__background"></div>
+      <div class="popup__content">
+        <button class="popup__close">
+          <img
+            id="image-closeIcon"
+            src="<%=require('./images/closeIcon.svg')%>"
+            alt="boton de cerrar"
+            class="popup__button-close"
+          />
+        </button>
+        <h2 class="popup__title">Cambiar foto de perfil</h2>
+        <form name="add" class="popup__form" novalidate>
+          <input
+            type="url"
+            required
+            class="popup__input popup__input_link-avatar"
+            id="linkAvatar"
+            name="avatar"
+            placeholder="Imagen (URL)"
+          />
+          <span class="popup__input-error link_avatar-error"></span>
+          <button id="add-submit" type="submit" class="popup__button-submit">
+            Guardar
+          </button>
+        </form>
+      </div>
+    </div>
     <template class="template">
       <div class="element">
         <button id="button-trash" class="element__button-trash"></button>
@@ -175,6 +232,7 @@
             id="button-like"
             class="element__like element__button-like"
           ></button>
+          <span class="element__like-counter">0</span>
         </div>
       </div>
     </template>

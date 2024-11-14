@@ -51,6 +51,10 @@
   margin: 34px auto 25px;
 }
 
+.popup__title-delete {
+  margin-bottom: 0;
+}
+
 .popup__form {
   margin: auto;
   max-width: 358px;
