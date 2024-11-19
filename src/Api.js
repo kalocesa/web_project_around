@@ -50,14 +50,14 @@ class Api {
   }
 
   likeCard(cardId) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "PUT", //actualiza el recurso, para poner el corazón de like, en vez del dislike.
       headers: this.headers,
     }).then(this.checkResponse);
   }
 
   dislikeCard(cardId) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE", //elimina el recurso del corazón del like y se queda en su estado original de dislike.
       headers: this.headers,
     }).then(this.checkResponse);

@@ -6,7 +6,7 @@ import {
   cardsContainer,
   nameInput,
   aboutInput,
-  initialCards,
+  settings,
 } from "./utils.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
@@ -16,15 +16,6 @@ import UserInfo from "./UserInfo.js";
 import Section from "./Section.js";
 import PopupWithConfirmation from "./PopupWithConfirmation.js";
 import { api } from "./Api.js";
-
-const settings = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button-submit",
-  inactiveButtonClass: "popup__button-submit_disabled",
-  inputErrorClass: "popup__input_type-error",
-  errorClass: "popup__input-error_active",
-};
 
 const profile = new FormValidator(formProfile, settings);
 profile.enableValidation();
@@ -79,21 +70,47 @@ const popupWithImage = new PopupWithImage(".popup_image");
 popupWithImage.setEventListeners();
 
 let sectionCard = null;
+let currentUser = null;
 
-api.getInitialCards().then((cards) => {
-  sectionCard = new Section(
-    {
-      items: cards,
-      renderer: (item) => {
-        const card = new Card(item.name, item.link, ".template", () => {
-          popupWithImage.open(item.name, item.link);
-        });
-        return card.generateCard();
+api.getProfileInfo().then((data) => {
+  const { about, name } = data;
+  currentUser = data;
+  userInfo.setUserInfo(name, about);
+  api.getInitialCards().then((cards) => {
+    sectionCard = new Section(
+      {
+        items: cards,
+        renderer: (item) => {
+          const card = new Card(
+            item,
+            ".template",
+            currentUser,
+            () => {
+              popupWithImage.open(item.name, item.link);
+            },
+            (cardId) => {
+              api.likeCard(cardId);
+            },
+            (cardId) => {
+              api.dislikeCard(cardId);
+            },
+            (cardId, Callback) => {
+              popupDelete.setSubmitAction(() => {
+                api.deleteCard(cardId).then(() => {
+                  Callback();
+                  popupDelete.close();
+                });
+              });
+              popupDelete.open();
+            }
+          );
+          return card.generateCard();
+        },
       },
-    },
-    cardsContainer
-  );
-  sectionCard.renderedItems();
+      cardsContainer
+    );
+    sectionCard.renderedItems();
+  });
 });
 
 /*function createCard(item) {
@@ -106,18 +123,33 @@ api.getInitialCards().then((cards) => {
 
 function createCard(item) {
   api.addCards(item.name, item.link).then(() => {
-    const newCard = new Card(item.name, item.link, ".template", () => {
-      popupWithImage.open(item.name, item.link);
-    });
+    const newCard = new Card(
+      item,
+      ".template",
+      currentUser,
+      () => {
+        popupWithImage.open(item.name, item.link);
+      },
+      (cardId) => {
+        api.likeCard(cardId);
+      },
+      (cardId) => {
+        api.dislikeCard(cardId);
+      },
+      (cardId, Callback) => {
+        popupDelete.setSubmitAction(() => {
+          api.deleteCard(cardId).then(() => {
+            Callback();
+            popupDelete.close();
+          });
+        });
+        popupDelete.open();
+      }
+    );
     const cardElement = newCard.generateCard();
     sectionCard.addItem(cardElement);
   });
 }
-
-api.getProfileInfo().then((data) => {
-  const { about, name } = data;
-  userInfo.setUserInfo(name, about);
-});
 
 const popupProfile = new PopupWithForm(".popup_profile");
 popupProfile.setEventListeners();
