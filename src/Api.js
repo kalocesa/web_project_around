@@ -12,12 +12,14 @@ class Api {
   }
 
   getProfileInfo() {
+    //listo
     return fetch(`${this.baseUrl}/users/me`, {
       headers: this.headers,
     }).then(this.checkResponse);
   }
 
   getInitialCards() {
+    //listo
     return fetch(`${this.baseUrl}/cards`, {
       headers: this.headers,
     }).then(this.checkResponse);
@@ -25,7 +27,7 @@ class Api {
 
   editProfile(name, about) {
     return fetch(`${this.baseUrl}/users/me`, {
-      method: "PATCH", //método para guardar los datos en el servidor y actualizarlos.
+      method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({ name, about }),
     }).then(this.checkResponse);
@@ -42,6 +44,7 @@ class Api {
   }
 
   addCards(name, link) {
+    //listo
     return fetch(`${this.baseUrl}/cards`, {
       method: "POST", //método para enviar datos que pueden ser editados
       headers: this.headers,
@@ -50,6 +53,7 @@ class Api {
   }
 
   likeCard(cardId) {
+    //listo
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "PUT", //actualiza el recurso, para poner el corazón de like, en vez del dislike.
       headers: this.headers,
@@ -57,6 +61,7 @@ class Api {
   }
 
   dislikeCard(cardId) {
+    //listo
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE", //elimina el recurso del corazón del like y se queda en su estado original de dislike.
       headers: this.headers,
@@ -64,6 +69,7 @@ class Api {
   }
 
   deleteCard(cardId) {
+    //listo
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
       method: "DELETE", //elimina la tarjeta
       headers: this.headers,
