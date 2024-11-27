@@ -155,9 +155,9 @@ api
   );
 
 function createCard(item) {
-  api.addCards(item.name, item.link).then(() => {
+  api.addCards(item.name, item.link).then((card) => {
     const newCard = new Card(
-      item,
+      card,
       ".template",
       currentUser,
       () => {
